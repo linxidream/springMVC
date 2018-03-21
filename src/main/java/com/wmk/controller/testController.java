@@ -25,7 +25,8 @@ public class testController {
     }
 
     @RequestMapping("/aaa.wmk")
-    public String aaa(){
+    public String aaa(Model model){
+        model.addAttribute("user","wmk");
         return "aaa";
     }
 

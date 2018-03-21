@@ -20,8 +20,8 @@
     <init-param>
       <!--配置dispatcher.xml作为mvc的配置文件-->
       <param-name>contextConfigLocation</param-name>
-      <!--<param-value>classpath:dispatcher-servlet.xml</param-value>-->
-      <param-value>classpath:springmvc_freemarker.xml</param-value>
+      <param-value>classpath:dispatcher-servlet.xml</param-value>
+      <!--<param-value>classpath:springmvc_freemarker.xml</param-value>-->
     </init-param>
     <load-on-startup>1</load-on-startup>
     <async-supported>true</async-supported>
@@ -40,4 +40,14 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!--<jsp-config>-->
+    <!--<taglib>-->
+      <!--<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>-->
+      <!--<taglib-location>/WEB-INF/static/html</taglib-location>-->
+    <!--</taglib>-->
+    <!--<taglib>-->
+      <!--<taglib-uri>http://java.sun.com/jstl/core-rt</taglib-uri>-->
+      <!--<taglib-location>/WEB-INF/static/html</taglib-location>-->
+    <!--</taglib>-->
+  <!--</jsp-config>-->
 </web-app>
