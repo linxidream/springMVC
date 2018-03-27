@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserService {
     public List<User> selectAllUser();
+
+    public User findUserByName(String user_name);
 }
