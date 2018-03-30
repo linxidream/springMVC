@@ -1,6 +1,9 @@
 package com.wmk.common.shiro;
 
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -35,5 +38,12 @@ public class CustomFromAuthenticationFilter extends FormAuthenticationFilter
         }*/
 
         return super.onAccessDenied(request, response);
+    }
+
+    @Override
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
+//        return super.onLoginSuccess(token, subject, request, response);
+        WebUtils.issueRedirect(request, response, getSuccessUrl());
+        return false;
     }
 }

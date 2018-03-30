@@ -39,19 +39,20 @@ public class CustomRealm extends AuthorizingRealm {
         //第二步:根据用户输入的userCode丛数据库查询
         //activeUser就是用户的身份信息
         User activeUser=new User();
-        activeUser.setUser_id("zhangsan");
+        activeUser.setUser_id(4);
         activeUser.setUser_name("zhangsan");
-
+        activeUser.setUser_password("123456");
         //根据用户id取出菜单
         //通过service取出菜单
         User user = new User();
         try {
-            user=userService.findUserByName("zhangsan");
+            user=userService.findUserByName(activeUser.getUser_name());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //判断是否从数据库中查询到用户信息
         if(userService == null){
             return null;
         }

@@ -38,7 +38,10 @@ public class UserController {
         }
 //        model.addAttribute("user",request.getRemoteUser());
 //        model.addAttribute("password",request.getRemoteUser());
-        return "/success";
+
+        //此方法不处理登录成功，shiro认证成功会自动跳转到上一个路径
+        //登录失败返回到login页面
+        return "/index";
     }
 
     //系统首页
@@ -53,6 +56,13 @@ public class UserController {
         model.addAttribute("activeUser",activeUser);
 
         return "/success";
+    }
+
+    //登陆失败页面
+    @RequestMapping("/refuse.wmk")
+    public String refuse(Model model)throws Exception{
+
+        return "/refuse";
     }
 
     //欢迎页面

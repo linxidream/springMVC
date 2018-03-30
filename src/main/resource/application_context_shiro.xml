@@ -23,6 +23,14 @@
         <!--认证成功统一跳转到first.wmk，建议不配置，不配置的话shiro认证成功会自动到上一个请求路径-->
         <property name="successUrl" value="/user/first.wmk"/>
         <property name="unauthorizedUrl" value="/user/refuse.wmk" />
+
+        <!--自定义filter-->
+        <property name="filters">
+            <map>
+                <!-- 将自定义的FormAuthenticationFilter注入shiroFiler中 -->
+                <entry key="authc" value-ref="formAuthenticationFilter" />
+            </map>
+        </property>
         <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
         <property name="filterChainDefinitions">
             <value>
@@ -34,12 +42,15 @@
                 <!--/**=anon 表示所有的url都可以匿名访问，anon是shiro中一个过滤器的简写，关于shiro中的过滤器介绍见-->
                 <!--/**=anon-->
                 <!-- -/**=authc 表示所有的url都必须认证通过才可以访问- -->
-                /welcome.wmk = anon
-                /login.wmk = authc
+            <!--    /welcome.wmk = anon
+                /login.wmk = authc-->
+                /** = authc
                 /logout.wmk = logout
             </value>
         </property>
     </bean>
+
+
 
     <!--自定义form认证过滤器-->
     <bean id="formAuthenticationFilter"
