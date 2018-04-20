@@ -52,6 +52,8 @@
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-event:1.4.0" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-web:1.4.0" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-spring:1.4.0" />
+          <element id="library" level="project" name="Maven: org.apache.shiro:shiro-cas:1.4.0" />
+          <element id="library" level="project" name="Maven: org.jasig.cas.client:cas-client-core:3.2.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

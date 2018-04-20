@@ -14,6 +14,21 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
+    <description>Shiro Configuration</description>
+
+    <!-- Shiro权限过滤过滤器定义 -->
+    <!--<bean name="shiroFilterChainDefinitions">-->
+        <!--<constructor-arg>-->
+            <!--<value>-->
+                <!--/images/**=anon-->
+                <!--/js/**=anon-->
+                <!--/style/**=anon-->
+                <!--/** = authc-->
+                <!--/logout.wmk = logout-->
+            <!--</value>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+
     <!--web.xml中shiro的filter对应的bean-->
     <!-- Shiro 的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -29,22 +44,18 @@
             <map>
                 <!-- 将自定义的FormAuthenticationFilter注入shiroFiler中 -->
                 <entry key="authc" value-ref="formAuthenticationFilter" />
+
+                <entry key="cas" value-ref="casFilter"/>
             </map>
         </property>
         <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
         <property name="filterChainDefinitions">
             <value>
-                <!--对静态资源设置匿名访问-->
+                <!--&lt;!&ndash;对静态资源设置匿名访问-->
                 /images/**=anon
                 /js/**=anon
                 /style/**=anon
-
-                <!--/**=anon 表示所有的url都可以匿名访问，anon是shiro中一个过滤器的简写，关于shiro中的过滤器介绍见-->
-                <!--/**=anon-->
-                <!-- -/**=authc 表示所有的url都必须认证通过才可以访问- -->
-            <!--    /welcome.wmk = anon
-                /login.wmk = authc-->
-                /** = authc
+                /user/** = authc
                 /logout.wmk = logout
             </value>
         </property>
@@ -61,6 +72,11 @@
         <property name="passwordParam" value="password" />
         <!--&lt;!&ndash;记住我input的名称&ndash;&gt;-->
         <!--<property name="rememberMeParam" value="rememberMe"/>-->
+    </bean>
+
+    <!-- CAS认证过滤器 -->
+    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+        <!--<property name="failureUrl" value="/user/login.wmk"/>-->
     </bean>
 
     <!--securityManage-->

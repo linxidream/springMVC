@@ -64,12 +64,4 @@ public class UserController {
 
         return "/refuse";
     }
-
-    //欢迎页面
-    @RequestMapping("/welcome.wmk")
-    public String welcome(Model model)throws Exception{
-
-        return "/index";
-
-    }
 }
