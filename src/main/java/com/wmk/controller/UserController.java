@@ -1,6 +1,8 @@
 package com.wmk.controller;
 
 import com.wmk.common.exception.CustomException;
+import com.wmk.common.shiro.pojo.ActiveUser;
+import com.wmk.entity.SysUser;
 import com.wmk.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -51,7 +53,7 @@ public class UserController {
         //从shiro的session中取出activeUser
         Subject subject= SecurityUtils.getSubject();
         //取出身份信息
-        User activeUser= (User) subject.getPrincipal();
+        ActiveUser activeUser= (ActiveUser) subject.getPrincipal();
         //通过model传到页面
         model.addAttribute("activeUser",activeUser);
 

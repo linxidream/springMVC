@@ -10,4 +10,5 @@ import java.util.List;
 public interface SysDao {
     List<SysUser> selectByExample(SysUserExample example);
 
+    SysUser selectByUserName(String user_name);
 }

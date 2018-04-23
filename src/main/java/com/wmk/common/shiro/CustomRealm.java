@@ -107,7 +107,7 @@ public class CustomRealm extends AuthorizingRealm {
         }
 
         //判断是否从数据库中查询到用户信息
-        if (sysUser==null)
+        if (sysService==null)
         {
             return null;
         }
