@@ -54,6 +54,7 @@
                 <!--&lt;!&ndash;对静态资源设置匿名访问-->
                 /images/**=anon
                 /js/**=anon
+                /css/**=anon
                 /style/**=anon
                 /user/** = authc
                 /logout.wmk = logout

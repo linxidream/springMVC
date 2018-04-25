@@ -23,7 +23,7 @@ public class SysServiceImple implements SysService{
      * @param userCode
      * @return
      */
-    @Override
+ /*   @Override
     public SysUser findSysUserByUserCode(String userCode) {
         SysUserExample sysUserExample=new SysUserExample();
         SysUserExample.Criteria criteria=sysUserExample.createCriteria();
@@ -34,6 +34,23 @@ public class SysServiceImple implements SysService{
         if (list!=null&&list.size()==1)
         {
             return list.get(0);
+        }
+
+        return null;
+    }
+*/
+    /**
+     * 根据账号查询用户信息
+     * @param userCode
+     * @return
+     */
+    @Override
+    public SysUser findSysUserByUserCode(String userCode) {
+        SysUser sysUser = new SysUser();
+        sysUser = sysDao.selectByUserName(userCode);
+
+        if(sysUser != null){
+            return sysUser;
         }
 
         return null;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wmk.dao.SysDao">
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.SysRolePermissionExample" >
+<!--
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wmk.common.shiro.pojo.SysUserExample" >
         select
         <if test="distinct" >
             distinct
@@ -14,5 +15,10 @@
         <if test="orderByClause != null" >
             order by ${orderByClause}
         </if>
+    </select>
+-->
+
+    <select id="selectByUserName" resultType="com.wmk.entity.SysUser" parameterType="java.lang.String">
+        select * from sys_user where usercode = #{user_name}
     </select>
 </mapper>

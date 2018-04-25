@@ -43,7 +43,7 @@ public class UserController {
 
         //此方法不处理登录成功，shiro认证成功会自动跳转到上一个路径
         //登录失败返回到login页面
-        return "/index";
+        return "/login";
     }
 
     //系统首页
@@ -56,8 +56,8 @@ public class UserController {
         ActiveUser activeUser= (ActiveUser) subject.getPrincipal();
         //通过model传到页面
         model.addAttribute("activeUser",activeUser);
-
-        return "/success";
+        return "/index";
+//        return "/succ";
     }
 
     //登陆失败页面
