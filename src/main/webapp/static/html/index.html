@@ -21,10 +21,14 @@
 </div>
 <div data-options="region:'west',split:true,title:'导航菜单'" style="width:15%">
     <div class="easyui-accordion" data-options="fit:true,border:false">
-        <#if activeUser.menus??>
+        <#if (activeUser.menus)??>
             <#list activeUser.menus as menu>
                 <div title=${menu.name} style="padding:10px;">
-                    content1
+                    <#if activeUser.permissions??>
+                        <#list activeUser.permissions as permission>
+                               <a href=${ctx}${permission.url} style="font-size: 14px;display:block;text-decoration: none;margin:0 0 5px 0 ;" icon="icon-log">${permission.name}</a>
+                        </#list>
+                    </#if>
                 </div>
             </#list>
         </#if>

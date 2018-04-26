@@ -118,16 +118,18 @@ public class CustomRealm extends AuthorizingRealm {
         activeUser.setUsername(sysUser.getUsername());
 
         List<SysPermission> menus=null;
+
+        List<SysPermission> permissions = null;
         try {
             menus=sysService.findMenuListByUserId(sysUser.getId());
-
+            permissions = sysPermissionDao.findPermissionListByUserId(sysUser.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         //将用户菜单设置到activeUser
         activeUser.setMenus(menus);
-
+        activeUser.setPermissions(permissions);
         ///将activeUser设置到simpleAuthenticationInfo
         SimpleAuthenticationInfo simpleAuthenticationInfo=new
                 SimpleAuthenticationInfo(activeUser,sysUser.getPassword(),this.getName());
@@ -140,6 +142,7 @@ public class CustomRealm extends AuthorizingRealm {
     /**
      * 获取权限授权信息，如果缓存中存在，则直接从缓存中获取，否则就重新获取， 登录成功后调用
      */
+/*
     protected AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {
         if (principals == null) {
             return null;
@@ -151,6 +154,7 @@ public class CustomRealm extends AuthorizingRealm {
 
         return info;
     }
+*/
 
 
 

@@ -21,4 +21,15 @@
 			(SELECT sys_role_id FROM sys_user_role
 				WHERE sys_user_id = #{id}))
 	</select>
+
+	<!-- 根据用户id查询权限 -->
+	<select id="findPermissionListByUserId"  parameterType="java.lang.String" resultType="com.wmk.entity.SysPermission">
+		SELECT	*	FROM sys_permission
+		WHERE TYPE = 'permission'
+		AND id IN
+		(SELECT sys_permission_id FROM sys_role_permission
+		WHERE sys_role_id IN
+		(SELECT sys_role_id FROM sys_user_role
+		WHERE sys_user_id = #{id}))
+	</select>
 </mapper>

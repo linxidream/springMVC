@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wmk.dao.UserDao">
     <select id="selectAllUser" resultType="com.wmk.entity.User">
-        select * from user
+        select * from user_by_me
     </select>
     <select id="findUserByName" resultType="com.wmk.entity.User">
-        select * from user where user_name = #{user_name}
+        select * from user_by_me where user_name = #{user_name}
     </select>
 </mapper>

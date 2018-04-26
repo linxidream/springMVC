@@ -4,18 +4,24 @@ import com.wmk.common.exception.CustomException;
 import com.wmk.common.shiro.pojo.ActiveUser;
 import com.wmk.entity.SysUser;
 import com.wmk.entity.User;
+import com.wmk.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -65,5 +71,19 @@ public class UserController {
     public String refuse(Model model)throws Exception{
 
         return "/refuse";
+    }
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/queryList.wmk")
+    @RequiresPermissions("item:query")
+    public ModelAndView queryList(){
+        List<User> userList = new ArrayList<User>();
+        userList = userService.selectAllUser();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userList",userList);
+        modelAndView.setViewName("/user/itemsList");
+        return modelAndView;
     }
 }
