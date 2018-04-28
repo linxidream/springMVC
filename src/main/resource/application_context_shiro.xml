@@ -16,19 +16,6 @@
 
     <description>Shiro Configuration</description>
 
-    <!-- Shiro权限过滤过滤器定义 -->
-    <!--<bean name="shiroFilterChainDefinitions">-->
-        <!--<constructor-arg>-->
-            <!--<value>-->
-                <!--/images/**=anon-->
-                <!--/js/**=anon-->
-                <!--/style/**=anon-->
-                <!--/** = authc-->
-                <!--/logout.wmk = logout-->
-            <!--</value>-->
-        <!--</constructor-arg>-->
-    <!--</bean>-->
-
     <!--web.xml中shiro的filter对应的bean-->
     <!-- Shiro 的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -72,7 +59,7 @@
         <!-- 表单中密码的input名称 -->
         <property name="passwordParam" value="password" />
         <!--&lt;!&ndash;记住我input的名称&ndash;&gt;-->
-        <!--<property name="rememberMeParam" value="rememberMe"/>-->
+        <property name="rememberMeParam" value="rememberMe"/>
     </bean>
 
     <!-- CAS认证过滤器 -->
@@ -80,10 +67,43 @@
         <!--<property name="failureUrl" value="/user/login.wmk"/>-->
     </bean>
 
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- session的失效时长，单位毫秒 -->
+        <property name="globalSessionTimeout" value="600000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+
+    <!-- 缓存管理器 -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>
+    </bean>
+
+    <!-- rememberMeManager管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cookie" ref="rememberMeCookie" />
+    </bean>
+    <!-- 记住我cookie -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!--rememberMe时cookie的名字-->
+        <constructor-arg value="rememberMe" />
+        <!-- 记住我cookie生效时间30天 -->
+        <property name="maxAge" value="2592000" />
+    </bean>
+
     <!--securityManage-->
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="customRealm" />
+        <!--注入缓存管理器-->
+        <property name="cacheManager" ref="cacheManager"/>
+
+        <!--注入会话管理器-->
+        <property name="sessionManager" ref="sessionManager" />
+
+        <!-- 记住我 -->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
     <!--自定义realm-->

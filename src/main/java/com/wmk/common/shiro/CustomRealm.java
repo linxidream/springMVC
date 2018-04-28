@@ -156,6 +156,12 @@ public class CustomRealm extends AuthorizingRealm {
     }
 */
 
+    //清除缓存
+    public void clearCached() {
+        PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
+        super.clearCache(principals);
+    }
+
 
 
     //用于授权
